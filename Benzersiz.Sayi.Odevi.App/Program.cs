@@ -10,22 +10,40 @@ namespace Benzersiz.Sayi.Odevi.App
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("0-100 arası benzersiz sayı üreticisi...\n");
             Console.Write("Kaç tane 'Benzersiz Sayı' üretilecek?:");
+
             int adet;
             adet = int.Parse(Console.ReadLine());
+
             int[] sayilar = new int[adet];
 
-            Random rnd = new Random();
 
-            for (int i = 0; i < sayilar.Length; i++)
+            Random rnd = new Random();
+            int i = 0;
+            while (adet != i)
             {
-                sayilar[i] = rnd.Next(0, 1000);
+                sayilar[i] = rnd.Next(0, 100);
+                int z = 0;
+                while (z < i)
+                {
+                    if (sayilar[i] == sayilar[z])
+                    {
+                        i--;
+                        break;
+                    }
+                    z++;
+                }
+                i++;
             }
+
             Array.Sort(sayilar);
-            for (int i = 0; i < sayilar.Length; i++)
+            Console.WriteLine(" ");
+            for (int j = 0; j < sayilar.Length; j++)
             {
-                Console.WriteLine($"{i + 1}. Benzersiz sayınız: {sayilar[i]}");
+                Console.WriteLine($"{j + 1}. Benzersiz sayınız: {sayilar[j]}");
             }
+            Console.ReadKey();
         }
     }
 }
